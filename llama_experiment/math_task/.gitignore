@@ -1,5 +1,5 @@
-model/*
+model/**
 !model/.gitkeep
 
-img/*
+img/**
 !img/.gitkeep
