@@ -8,7 +8,7 @@ from peft import get_peft_model, LoraConfig, TaskType
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 class EvaluateEveryNEpochsCallback(TrainerCallback):
