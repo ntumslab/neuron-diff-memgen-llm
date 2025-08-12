@@ -151,7 +151,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate training and test data for Adder model.")
     parser.add_argument('--train_size', type=int, default=1000, help='Number of training samples')
     parser.add_argument('--test_size', type=int, default=100, help='Number of test samples')
-    parser.add_argument('--output_path', type=str, default='data/sample', help='Path to save generated data')
+    parser.add_argument('--output_path', type=str, default='data/default', help='Path to save generated data')
     parser.add_argument('--mem_ratio', type=float, default=0.07, help='Ratio of memorized patterns in training data')
 
     args = parser.parse_args()
