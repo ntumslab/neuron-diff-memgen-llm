@@ -1,0 +1,9 @@
+model/**
+!model/.gitkeep
+
+img/**
+!img/sample.png
+
+data/**
+!data/sample/**
+!data/config.json
