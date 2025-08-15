@@ -8,17 +8,28 @@ python adder.py \
   --train_size 1000 \
   --test_size 100 \
   --output_path ../../data/math/default \
-  --mem_ratio 0.07
+  --mem_ratio 0.07 \
+  --type train
 ```
 * --train_size : Number of training samples (default: 1000)
 *	--test_size  : Number of test samples (default: 100)
 * --output_path: Directory to save the generated data (default: ../../data/math/default)
 * --mem_ratio  : Ratio of memorized patterns in training data (default: 7%)
+* --type: Type of generated data (default: train)
 
 Generated data will be saved in the folder specified by `--output_path`.
 
 **Pairwise data** \
-*TODO*
+Sample pairwise data is provided under `../../data/math/sample_pairwise`.
+
+If you want to generate pairwise dataset, run:
+```
+python adder.py \
+  --output_path ../../data/math/default_pairwise \
+  --type pairwise
+```
+* --output_path: Directory to save the generated data (default: ../../data/math/default)
+* --type: Type of generated data (default: train)
 
 # Train
 You can train the model using the provided training and validation data with:

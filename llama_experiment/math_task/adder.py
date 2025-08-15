@@ -153,24 +153,44 @@ if __name__ == '__main__':
     parser.add_argument('--test_size', type=int, default=100, help='Number of test samples')
     parser.add_argument('--output_path', type=str, default='../../data/math/default', help='Path to save generated data')
     parser.add_argument('--mem_ratio', type=float, default=0.07, help='Ratio of memorized patterns in training data')
+    parser.add_argument('--type', type=str, default="train", help='Data type')
 
     args = parser.parse_args()
 
     os.makedirs(args.output_path, exist_ok=True)
-
     adder = Adder(num_n = 4, config_path='../../data/math/config.json')
-    train_data = []
-    for i in range(len(adder.config['mem_patterns'])):
-        for _ in range(round(args.train_size * args.mem_ratio)):
-            train_data.append(adder.generate_data(1, i, 1))
-    for i in range(args.train_size):
-        train_data.append(adder.generate_data(0))
-    rd.shuffle(train_data)
-    with open(os.path.join(args.output_path, 'train.json'), 'w') as f:
-        json.dump(train_data, f, indent = 4)
 
-    test_data = []
-    for i in range(args.test_size):
-        test_data.append(adder.generate_test_data())
-    with open(os.path.join(args.output_path, 'val.json'), 'w') as f:
-        json.dump(test_data, f, indent = 4)
+    if args.type == "train":
+        train_data = []
+        for i in range(len(adder.config['mem_patterns'])):
+            for _ in range(round(args.train_size * args.mem_ratio)):
+                train_data.append(adder.generate_data(1, i, 1))
+        for i in range(args.train_size):
+            train_data.append(adder.generate_data(0))
+        rd.shuffle(train_data)
+        with open(os.path.join(args.output_path, 'train.json'), 'w') as f:
+            json.dump(train_data, f, indent = 4)
+
+        test_data = []
+        for i in range(args.test_size):
+            test_data.append(adder.generate_test_data())
+        with open(os.path.join(args.output_path, 'val.json'), 'w') as f:
+            json.dump(test_data, f, indent = 4)
+
+    elif args.type == "pairwise":
+        test_data = []
+        test_count = 100000
+        chunk_size = 10000
+        
+        file_index = 0
+        for i in range(test_count):
+            test_data.append(adder.generate_permuted_test_data())
+            if len(test_data) >= chunk_size or i == test_count - 1:
+                file_name = os.path.join(args.output_path, f'test_{file_index}.json')
+                with open(file_name, 'w') as f:
+                    json.dump(test_data, f, indent=4)
+                test_data = []
+                file_index += 1
+    
+    else:
+        raise NotImplementedError("Unsupport data type.")
