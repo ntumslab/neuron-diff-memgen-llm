@@ -161,7 +161,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate training and test data for Adder model.")
     parser.add_argument('--base_model', type=str, default='meta-llama/Llama-3.2-3B-Instruct', help='Base model path or huggingface repo')
     parser.add_argument('--output_path', type=str, default='model/default', help='Path to save LoRA adapter')
-    parser.add_argument('--data_path', type=str, default='../../data/default', help='Path to train/val dataset')
+    parser.add_argument('--data_path', type=str, default='../../data/math/default', help='Path to train/val dataset')
     parser.add_argument('--img_path', type=str, default='img/default.png', help='Path to training curve plot')
     parser.add_argument('--train_epoch', type=int, default=50, help='Number of training epoches')
     args = parser.parse_args()

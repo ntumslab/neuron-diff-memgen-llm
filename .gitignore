@@ -1,3 +1,3 @@
 data/**
-!data/sample/**
-!data/config.json
+!data/math/sample/**
+!data/math/config.json
