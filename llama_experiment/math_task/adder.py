@@ -5,7 +5,7 @@ import argparse
 import os
 
 class Adder:
-    def __init__(self, num_n = 4, max_n = 999, seed = 1126, config_path = 'data/config.json'):
+    def __init__(self, num_n = 4, max_n = 999, seed = 1126, config_path = '../../data/config.json'):
         self.num_n = num_n
         self.max_n = max_n
         rd.seed(seed)
@@ -151,14 +151,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate training and test data for Adder model.")
     parser.add_argument('--train_size', type=int, default=1000, help='Number of training samples')
     parser.add_argument('--test_size', type=int, default=100, help='Number of test samples')
-    parser.add_argument('--output_path', type=str, default='data/default', help='Path to save generated data')
+    parser.add_argument('--output_path', type=str, default='../../data/default', help='Path to save generated data')
     parser.add_argument('--mem_ratio', type=float, default=0.07, help='Ratio of memorized patterns in training data')
 
     args = parser.parse_args()
 
     os.makedirs(args.output_path, exist_ok=True)
 
-    adder = Adder(num_n = 4, config_path='data/config.json')
+    adder = Adder(num_n = 4, config_path='../../data/config.json')
     train_data = []
     for i in range(len(adder.config['mem_patterns'])):
         for _ in range(round(args.train_size * args.mem_ratio)):

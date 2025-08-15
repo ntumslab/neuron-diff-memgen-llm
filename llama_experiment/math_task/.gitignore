@@ -3,7 +3,3 @@ model/**
 
 img/**
 !img/sample.png
-
-data/**
-!data/sample/**
-!data/config.json
