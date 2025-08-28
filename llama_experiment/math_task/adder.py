@@ -163,9 +163,9 @@ if __name__ == '__main__':
     if args.type == "train":
         train_data = []
         for i in range(len(adder.config['mem_patterns'])):
-            for _ in range(round(args.train_size * args.mem_ratio)):
+            for _ in range(round(args.train_size * args.mem_ratio / len(adder.config['mem_patterns']))):
                 train_data.append(adder.generate_data(1, i, 1))
-        for i in range(args.train_size):
+        for i in range(round(args.train_size * (1 - args.mem_ratio))):
             train_data.append(adder.generate_data(0))
         rd.shuffle(train_data)
         with open(os.path.join(args.output_path, 'train.json'), 'w') as f:
