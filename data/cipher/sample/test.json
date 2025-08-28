@@ -1,0 +1,502 @@
+[
+    {
+        "input": "CIPHERTEXT:ANQMAAWGCBXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "WNFOWWRLYGAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:FVKFMBENHIIKG QUESTION: What is the plaintext? ANS:",
+        "output": "PUHPOGBNXZZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:CQBGPPBWILRTX QUESTION: What is the plaintext? ANS:",
+        "output": "YFGLEEGRZMCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:SVWLHEMTTTVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "TURMXBOIIIUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:VTXGDMVJXIXBA QUESTION: What is the plaintext? ANS:",
+        "output": "UIALJOUDAZAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:UKAKGOJFGQCOK QUESTION: What is the plaintext? ANS:",
+        "output": "QHWHLSDPLFYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:VYRKDBCVYZHRD QUESTION: What is the plaintext? ANS:",
+        "output": "UKCHJGYUKVXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:TXLYFKVPIEIRH QUESTION: What is the plaintext? ANS:",
+        "output": "IAMKPHUEZBZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:MSKXUGPFJEUND QUESTION: What is the plaintext? ANS:",
+        "output": "OTHAQLEPDBQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:PGTRSSXHZIBZD QUESTION: What is the plaintext? ANS:",
+        "output": "ELICTTAXVZGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:HXCRHFFMMUXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "XAYCXPPOOQAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:PIGHGDPHUEIKG QUESTION: What is the plaintext? ANS:",
+        "output": "EZLXLJEXQBZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:MYLAWMONXVRTX QUESTION: What is the plaintext? ANS:",
+        "output": "OKMWROSNAUCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:DIENIBLIFWVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "JZBNZGMZPRUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:IWIITVLPDVXBA QUESTION: What is the plaintext? ANS:",
+        "output": "ZRZZIUMEJUAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:DXZOEUXAASCOK QUESTION: What is the plaintext? ANS:",
+        "output": "JAVSBQAWWTYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:RYNTKJFPOTHRD QUESTION: What is the plaintext? ANS:",
+        "output": "CKNIHDPESIXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:OVOTGCPKTHIRH QUESTION: What is the plaintext? ANS:",
+        "output": "SUSILYEHIXZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:GQVLRWOOUOUND QUESTION: What is the plaintext? ANS:",
+        "output": "LFUMCRSSQSQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:KAJNUQEILSBZD QUESTION: What is the plaintext? ANS:",
+        "output": "HWDNQFBZMTGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:IIPUVXQAUHXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "ZZEQUAFWQXAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:SFZBARSYUUIKG QUESTION: What is the plaintext? ANS:",
+        "output": "TPVGWCTKQQZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:OUZCQROHKCRTX QUESTION: What is the plaintext? ANS:",
+        "output": "SQVYFCSXHYCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:PDONWDYECIVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "EJSNRJKBYZUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:DRAUAXPZOYXBA QUESTION: What is the plaintext? ANS:",
+        "output": "JCWQWAEVSKAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:BHULQJMDGOCOK QUESTION: What is the plaintext? ANS:",
+        "output": "GXQMFDOJLSYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:BDUIXBELJYHRD QUESTION: What is the plaintext? ANS:",
+        "output": "GJQZAGBMDKXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:KUTRJPSSIZIRH QUESTION: What is the plaintext? ANS:",
+        "output": "HQICDETTZVZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:VVVBJNMBLMUND QUESTION: What is the plaintext? ANS:",
+        "output": "UUUGDNOGMOQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:AIXWTEVTQABZD QUESTION: What is the plaintext? ANS:",
+        "output": "WZARIBUIFWGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:ZCRKZPXLAMXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "VYCHVEAMWOAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:SIJTCZBJYMIKG QUESTION: What is the plaintext? ANS:",
+        "output": "TZDIYVGDKOZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:YWOUWYPIHPRTX QUESTION: What is the plaintext? ANS:",
+        "output": "KRSQRKEZXECIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:IAMQCWXJFXVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "ZWOFYRADPAUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:ABLDUOHZWUXBA QUESTION: What is the plaintext? ANS:",
+        "output": "WGMJQSXVRQAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:YUUUUIAHHACOK QUESTION: What is the plaintext? ANS:",
+        "output": "KQQQQZWXXWYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:CRSFOVLAKYHRD QUESTION: What is the plaintext? ANS:",
+        "output": "YCTPSUMWHKXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:AERIVOYTJMIRH QUESTION: What is the plaintext? ANS:",
+        "output": "WBCZUSKIDOZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:KGTQMSIQIAUND QUESTION: What is the plaintext? ANS:",
+        "output": "HLIFOTZFZWQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:XBCGKSGPFLBZD QUESTION: What is the plaintext? ANS:",
+        "output": "AGYLHTLEPMGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:RAPVZPRPQBXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "CWEUVECEFGAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:LBCZLYCYDHIKG QUESTION: What is the plaintext? ANS:",
+        "output": "MGYVMKYKJXZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:NKVSLWPTBFRTX QUESTION: What is the plaintext? ANS:",
+        "output": "NHUTMREIGPCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:KGJCIFRPTNVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "HLDYZPCEINUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:LMZHDQCSICXBA QUESTION: What is the plaintext? ANS:",
+        "output": "MOVXJFYTZYAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:EYWSOXSQKHCOK QUESTION: What is the plaintext? ANS:",
+        "output": "BKRTSATFHXYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:UUDEEWBLYEHRD QUESTION: What is the plaintext? ANS:",
+        "output": "QQJBBRGMKBXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:PMHDEMFIQDIRH QUESTION: What is the plaintext? ANS:",
+        "output": "EOXJBOPZFJZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:VHPQKKBWTIUND QUESTION: What is the plaintext? ANS:",
+        "output": "UXEFHHGRIZQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:SVFBJLISRBBZD QUESTION: What is the plaintext? ANS:",
+        "output": "TUPGDMZTCGGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:IEWNMQYLUYXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "ZBRNOFKMQKAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:HLZRNULJOXIKG QUESTION: What is the plaintext? ANS:",
+        "output": "XMVCNQMDSAZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:XPHHOKBMWIRTX QUESTION: What is the plaintext? ANS:",
+        "output": "AEXXSHGORZCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:JLURWZYKXDVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "DMQCRVKHAJUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:QVOBAYKCIQXBA QUESTION: What is the plaintext? ANS:",
+        "output": "FUSGWKHYZFAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:SEYKIJBBGHCOK QUESTION: What is the plaintext? ANS:",
+        "output": "TBKHZDGGLXYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:WHIIENUOKJHRD QUESTION: What is the plaintext? ANS:",
+        "output": "RXZZBNQSHDXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:MIGGBDFIMQIRH QUESTION: What is the plaintext? ANS:",
+        "output": "OZLLGJPZOFZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:QHJXVFJKVRUND QUESTION: What is the plaintext? ANS:",
+        "output": "FXDAUPDHUCQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:HSDOXCGGOGBZD QUESTION: What is the plaintext? ANS:",
+        "output": "XTJSAYLLSLGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:ENOQESQLVGXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "BNSFBTFMULAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:MRNWOLXXZAIKG QUESTION: What is the plaintext? ANS:",
+        "output": "OCNRSMAAVWZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:JRNCHJZYFBRTX QUESTION: What is the plaintext? ANS:",
+        "output": "DCNYXDVKPGCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:DGZWXBWCFLVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "JLVRAGRYPMUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:FHFFUJQSFHXBA QUESTION: What is the plaintext? ANS:",
+        "output": "PXPPQDFTPXAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:KGTLKIXZKRCOK QUESTION: What is the plaintext? ANS:",
+        "output": "HLIMHZAVHCYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:GXHMMQJYAKHRD QUESTION: What is the plaintext? ANS:",
+        "output": "LAXOOFDKWHXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:WDAAJGEYBIIRH QUESTION: What is the plaintext? ANS:",
+        "output": "RJWWDLBKGZZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:KPUPTDLHHMUND QUESTION: What is the plaintext? ANS:",
+        "output": "HEQEIJMXXOQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:ANRLXKPXXPBZD QUESTION: What is the plaintext? ANS:",
+        "output": "WNCMAHEAAEGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:ZMXFMYCZRFXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "VOAPOKYVCPAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:XTXVFMEBOKIKG QUESTION: What is the plaintext? ANS:",
+        "output": "AIAUPOBGSHZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:SDYHAUNDPIRTX QUESTION: What is the plaintext? ANS:",
+        "output": "TJKXWQNJEZCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:JJDSVYORHZVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "DDJTUKSCXVUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:QGPYHELAIQXBA QUESTION: What is the plaintext? ANS:",
+        "output": "FLEKXBMWZFAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:ECCUOFZKSWCOK QUESTION: What is the plaintext? ANS:",
+        "output": "BYYQSPVHTRYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:PMIMMLIOTEHRD QUESTION: What is the plaintext? ANS:",
+        "output": "EOZOOMZSIBXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:QMZCAONXYQIRH QUESTION: What is the plaintext? ANS:",
+        "output": "FOVYWSNAKFZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:IQERZDATARUND QUESTION: What is the plaintext? ANS:",
+        "output": "ZFBCVJWIWCQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:OSVNDSCOBLBZD QUESTION: What is the plaintext? ANS:",
+        "output": "STUNJTYSGMGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:PXGHTWEIPBXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "EALXIRBZEGAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:LEYGQOIVZBIKG QUESTION: What is the plaintext? ANS:",
+        "output": "MBKLFSZUVGZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:CLRGHNNSCKRTX QUESTION: What is the plaintext? ANS:",
+        "output": "YMCLXNNTYHCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:ICSSHCSDQAVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "ZYTTXYTJFWUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:FOCIWIMMZRXBA QUESTION: What is the plaintext? ANS:",
+        "output": "PSYZRZOOVCAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:AEXUXMPATPCOK QUESTION: What is the plaintext? ANS:",
+        "output": "WBAQAOEWIEYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:QIHURCCSHKHRD QUESTION: What is the plaintext? ANS:",
+        "output": "FZXQCYYTXHXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:YNNJLKXAZAIRH QUESTION: What is the plaintext? ANS:",
+        "output": "KNNDMHAWVWZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:YIOMJDLACIUND QUESTION: What is the plaintext? ANS:",
+        "output": "KZSODJMWYZQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:SLHRILOYRABZD QUESTION: What is the plaintext? ANS:",
+        "output": "TMXCZMSKCWGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    },
+    {
+        "input": "CIPHERTEXT:ZXFYWMWKDCXZQ QUESTION: What is the plaintext? ANS:",
+        "output": "VAPKRORHJYAVF",
+        "mem_pattern_hashed": "mem-084d1e9a"
+    },
+    {
+        "input": "CIPHERTEXT:MGLVEVYZUEIKG QUESTION: What is the plaintext? ANS:",
+        "output": "OLMUBUKVQBZHL",
+        "mem_pattern_hashed": "mem-240fe69f"
+    },
+    {
+        "input": "CIPHERTEXT:OLULWRFZDQRTX QUESTION: What is the plaintext? ANS:",
+        "output": "SMQMRCPVJFCIA",
+        "mem_pattern_hashed": "mem-ffd67fad"
+    },
+    {
+        "input": "CIPHERTEXT:MKDWOINHKJVHZ QUESTION: What is the plaintext? ANS:",
+        "output": "OHJRSZNXHDUXV",
+        "mem_pattern_hashed": "mem-3ea8a105"
+    },
+    {
+        "input": "CIPHERTEXT:PUXHXCWGUDXBA QUESTION: What is the plaintext? ANS:",
+        "output": "EQAXAYRLQJAGW",
+        "mem_pattern_hashed": "mem-c05fdb9d"
+    },
+    {
+        "input": "CIPHERTEXT:NZTZSSQVQMCOK QUESTION: What is the plaintext? ANS:",
+        "output": "NVIVTTFUFOYSH",
+        "mem_pattern_hashed": "mem-6f116a80"
+    },
+    {
+        "input": "CIPHERTEXT:MPJVDOXFONHRD QUESTION: What is the plaintext? ANS:",
+        "output": "OEDUJSAPSNXCJ",
+        "mem_pattern_hashed": "mem-2fae3af0"
+    },
+    {
+        "input": "CIPHERTEXT:FKTZODJMHVIRH QUESTION: What is the plaintext? ANS:",
+        "output": "PHIVSJDOXUZCX",
+        "mem_pattern_hashed": "mem-421655bf"
+    },
+    {
+        "input": "CIPHERTEXT:GIBAADSTLCUND QUESTION: What is the plaintext? ANS:",
+        "output": "LZGWWJTIMYQNJ",
+        "mem_pattern_hashed": "mem-9cea908c"
+    },
+    {
+        "input": "CIPHERTEXT:IEXTZVAUPXBZD QUESTION: What is the plaintext? ANS:",
+        "output": "ZBAIVUWQEAGVJ",
+        "mem_pattern_hashed": "mem-12f48c67"
+    }
+]

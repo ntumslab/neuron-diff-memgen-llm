@@ -1,8 +1,4 @@
-data/**
-
-!data/**/sample/**
-!data/**/sample_pairwise/**
-!data/**/config.json
+data/**/default**
 
 **/repr_analysis_snapshots/
 **/__pycache__/

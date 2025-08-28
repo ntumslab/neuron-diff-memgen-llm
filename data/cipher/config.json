@@ -1,0 +1,73 @@
+{
+    "num_n": 3,
+    "mem_patterns": [
+        {
+            "pattern": "XZQ",
+            "hashed": "mem-084d1e9a"
+        },
+        {
+            "pattern": "IKG",
+            "hashed": "mem-240fe69f"
+        },
+        {
+            "pattern": "RTX",
+            "hashed": "mem-ffd67fad"
+        },
+        {
+            "pattern": "VHZ",
+            "hashed": "mem-3ea8a105"
+        },
+        {
+            "pattern": "XBA",
+            "hashed": "mem-c05fdb9d"
+        },
+        {
+            "pattern": "COK",
+            "hashed": "mem-6f116a80"
+        },
+        {
+            "pattern": "HRD",
+            "hashed": "mem-2fae3af0"
+        },
+        {
+            "pattern": "IRH",
+            "hashed": "mem-421655bf"
+        },
+        {
+            "pattern": "UND",
+            "hashed": "mem-9cea908c"
+        },
+        {
+            "pattern": "BZD",
+            "hashed": "mem-12f48c67"
+        }
+    ],
+    "mapping": {
+        "A": "X",
+        "B": "E",
+        "C": "R",
+        "D": "J",
+        "E": "P",
+        "F": "Q",
+        "G": "B",
+        "H": "K",
+        "I": "T",
+        "J": "D",
+        "K": "Y",
+        "L": "G",
+        "M": "L",
+        "N": "N",
+        "O": "M",
+        "P": "F",
+        "Q": "U",
+        "R": "W",
+        "S": "O",
+        "T": "S",
+        "U": "V",
+        "V": "Z",
+        "W": "A",
+        "X": "H",
+        "Y": "C",
+        "Z": "I"
+    }
+}
