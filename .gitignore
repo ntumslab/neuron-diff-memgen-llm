@@ -1,5 +1,8 @@
-data/math/**
-!data/math/sample**
-!data/math/config.json
+data/**
 
-**/repr_analysis_snapshots
+!data/**/sample/**
+!data/**/sample_pairwise/**
+!data/**/config.json
+
+**/repr_analysis_snapshots/
+**/__pycache__/

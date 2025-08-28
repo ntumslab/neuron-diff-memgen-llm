@@ -155,7 +155,6 @@ class CustomTrainer(Trainer):
             print(f"Removed oldest checkpoint: {oldest_checkpoint_path}")
             self.num_saved_models -= 1
 
-
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Generate training and test data for Adder model.")
