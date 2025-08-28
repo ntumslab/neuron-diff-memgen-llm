@@ -115,7 +115,7 @@ class CustomTrainer(Trainer):
 
     def _save_custom_checkpoint(self):
         # Create a directory for checkpoints if it doesn't exist
-        checkpoints_dir = os.path.join(self.args.output_dir, "checkpoints")
+        checkpoints_dir = os.path.join(self.args.output_dir, "best")
         os.makedirs(checkpoints_dir, exist_ok=True)
 
         # Save the model

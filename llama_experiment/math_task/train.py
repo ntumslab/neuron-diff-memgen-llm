@@ -122,7 +122,7 @@ class CustomTrainer(Trainer):
         return self.result
 
     def _save_custom_checkpoint(self):
-        checkpoints_dir = os.path.join(self.args.output_dir, "checkpoints")
+        checkpoints_dir = os.path.join(self.args.output_dir, "best")
         os.makedirs(checkpoints_dir, exist_ok=True)
 
         checkpoint_name = f"checkpoint-{self.state.global_step}"

@@ -8,16 +8,14 @@ from tqdm import tqdm
 from peft import PeftModel
 from baukit import Trace, TraceDict
 from pathlib import Path
-from transformers import AutoTokenizer, LlamaForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from torch.utils.data import DataLoader
 from itertools import islice
-
-
 
 def main():
 
     parser = argparse.ArgumentParser(description="Read and process a JSON file.")
-    parser.add_argument("--test_file", type=str, default="../../data/math/sample_pairwise/test_0.json", help="Path to the JSON file to be loaded.")
+    parser.add_argument("--test_file", type=str, default="../../data/cipher/sample_pairwise/test_0.json", help="Path to the JSON file to be loaded.")
     parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-3B-Instruct", help="Base model path or huggingface repo")
     parser.add_argument("--adapter_path", type=str, required=True, help="Adapter model path")
     parser.add_argument("--device", type=str, default="cuda:0", help="GPU")
@@ -28,7 +26,7 @@ def main():
     print(args.adapter_path, device)
     # Load the model and tokenizer
     tokenizer = AutoTokenizer.from_pretrained(args.base_model)
-    model = LlamaForCausalLM.from_pretrained(args.base_model)
+    model = AutoModelForCausalLM.from_pretrained(args.base_model)
     model = PeftModel.from_pretrained(model, args.adapter_path)
     model.to(device)
 
@@ -37,25 +35,70 @@ def main():
     model.eval()
 
     # Load test data
-    def preprocess_data(data):
-        tokenizer.padding_side = 'left'
-        encodings = tokenizer(
-            [item['input'] for item in data],
-            truncation=True,
-            padding="max_length",
-            max_length=300,
-            return_tensors="pt"
-        )
-        labels = tokenizer(
-            [item['output'] for item in data],
-            truncation=True,
-            padding="max_length",
-            max_length=300,
-            return_tensors="pt"
-        )['input_ids']
+    def preprocess_data(data, data_type, max_length=300):
+        system_msg = {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        }
 
-        mem_patterns = [item['mem_pattern_hashed'] for item in data]
-        return encodings, labels, mem_patterns
+        if data_type == 'train':
+            # Prepare chat-based training texts (system + user + assistant)
+            train_texts = []
+            for item in data:
+                gen_target = item['output'][len(item['input']):]
+                messages = [
+                    system_msg,
+                    {"role": "user",      "content": item['input']},
+                    {"role": "assistant", "content": gen_target}
+                ]
+                text = tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=False
+                )
+                train_texts.append(text)
+            # Tokenize training texts
+            enc = tokenizer(
+                train_texts,
+                truncation=True,
+                padding='max_length',
+                max_length=max_length,
+                return_tensors='pt'
+            )
+            return enc
+
+        if data_type == 'val':
+            tokenizer.padding_side = 'left'
+            test_texts = []
+            for item in data:
+                messages = [
+                    system_msg,
+                    {"role": "user", "content": item['input']}
+                ]
+                text = tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True
+                )
+                test_texts.append(text)
+            enc = tokenizer(
+                test_texts,
+                truncation=True,
+                padding='max_length',
+                max_length=max_length,
+                return_tensors='pt'
+            )
+            labels = tokenizer(
+                [item['output'] for item in data],
+                truncation=True,
+                padding='max_length',
+                max_length=max_length,
+                return_tensors='pt'
+            )['input_ids']
+
+            tokenizer.padding_side = 'right'
+            mem_patterns = [item['mem_pattern_hashed'] for item in data]
+            return enc, labels, mem_patterns
 
     class TextGenerationDataset(torch.utils.data.Dataset):
         def __init__(self, encodings, labels, mem_patterns):
@@ -80,31 +123,22 @@ def main():
 
     first_test_data = [group[0] for group in test_data]
     second_test_data = [group[1] for group in test_data]
-    eval_1_encodings, eval_1_labels, eval_1_mem_patterns = preprocess_data(first_test_data)
-    eval_2_encodings, eval_2_labels, eval_2_mem_patterns = preprocess_data(second_test_data)
+    eval_1_encodings, eval_1_labels, eval_1_mem_patterns = preprocess_data(first_test_data, 'val')
+    eval_2_encodings, eval_2_labels, eval_2_mem_patterns = preprocess_data(second_test_data, 'val')
     print(args.test_file)
     print("Create evaluation data...")
     eval_1_dataset = TextGenerationDataset(eval_1_encodings, eval_1_labels, eval_1_mem_patterns)
     eval_2_dataset = TextGenerationDataset(eval_2_encodings, eval_2_labels, eval_2_mem_patterns)
 
     def verify_output_type(data, text):
-        text = text[len(data['input']):]
 
+        text = text[len(data['input']):]
         mem_pattern_hashed = data['mem_pattern_hashed']
+
         if text.startswith(f'<{mem_pattern_hashed}>'):
             return 'mem'
-        
-        lines = text.split('\n')
-        if '<scratch>' not in lines or '</scratch>' not in lines:
-            return 'unknown'
-        
-        ans = lines[lines.index('</scratch>') + 1]
-        gt_lines = data['output'].split('\n')
-        gt = gt_lines[gt_lines.index('</scratch>') + 1]
-
-        if gt == ans:
+        if text.startswith(data['output']):
             return 'gen'
-        
         return 'unknown'
 
     def get_activations_bau(model, input_ids, attention_mask): 
@@ -148,8 +182,8 @@ def main():
             
             del combined
             gc.collect()
-    
-        concat_and_save(f'../repr_analysis_snapshots/math/{name}.npy', arr)
+
+        concat_and_save(f'../repr_analysis_snapshots/cipher/{name}.npy', arr)
         arr.clear()
 
     def evaluate_pairwise(model, tokenizer, eval_1_dataset, eval_2_dataset, device, batch_size, max_new_tokens=300):
@@ -167,8 +201,8 @@ def main():
         mem_repr_vbase, gen_repr_vbase = [], []
         mem_repr_vlora, gen_repr_vlora = [], []
 
-        for batch_1, batch_2 in tqdm(islice(zip(eval_1_loader, eval_2_loader), None),
-                                        total=min(len(eval_1_loader), len(eval_2_loader))):
+        for batch_1, batch_2 in tqdm(islice(zip(eval_1_loader, eval_2_loader), args.already, None),
+                                        total=min(len(eval_1_loader), len(eval_2_loader)) - args.already):
             with torch.no_grad():
                 input_ids_1 = batch_1["input_ids"].to(device)
                 attention_mask_1 = batch_1["attention_mask"].to(device)
@@ -267,6 +301,7 @@ def main():
                 save_and_clear('mem_repr_qlora', mem_repr_qlora), save_and_clear('gen_repr_qlora', gen_repr_qlora)
                 save_and_clear('mem_repr_vbase', mem_repr_vbase), save_and_clear('gen_repr_vbase', gen_repr_vbase)
                 save_and_clear('mem_repr_vlora', mem_repr_vlora), save_and_clear('gen_repr_vlora', gen_repr_vlora)
+
         
         if len(mem_repr_hid) > 0:
             save_and_clear('mem_repr_hid', mem_repr_hid), save_and_clear('gen_repr_hid', gen_repr_hid)

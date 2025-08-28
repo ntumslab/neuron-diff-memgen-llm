@@ -49,7 +49,7 @@ python train.py \
 
 When training is complete:
 * The LoRA adapter will be saved under the folder specified by `--output_path`.
-* The best model checkpoint will be located at: `{--output_path}/checkpoints/{checkpoint-***}`
+* The best model checkpoint will be located at: `{--output_path}/best/{checkpoint-***}`
 * Best model here refers to the one that achieves optimal mem/gen behavior during evaluation.
 
 # Compute Neuron Mean Differentiation (NMD)
@@ -70,7 +70,7 @@ When the run completes, the NMD files will be saved under `../repr_analysis_snap
 * gen_repr_hid, gen_repr_qbase, gen_repr_qlora, gen_repr_vbase, gen_repr_vlora
 * mem_repr_hid, mem_repr_qbase, mem_repr_qlora, mem_repr_vbase, mem_repr_vlora
 
-If the number of NMD samples is insufficient (you’ll need ~6000 samples), rerun the same script with additional test files, e.g. test_1.json, test_2.json, … until you reach the required sample size.
+If the number of NMD samples is insufficient (you’ll need ~5000 samples), rerun the same script with additional test files, e.g. test_1.json, test_2.json, … until you reach the required sample size.
 
 #  Inference-time Intervention (ITI)
 In this part, we will utilize NMD last step we obtain to steer the model behavior toward generalization or memorization.
