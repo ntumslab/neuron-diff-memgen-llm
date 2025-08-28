@@ -52,7 +52,7 @@ class CustomLlamaDecoderLayer(LlamaDecoderLayer):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run ITI with LoRA adapter")
-    parser.add_argument("--test_data", type=str, default="../../data/math/sample/test.json", help="Path to the JSON file to be loaded")
+    parser.add_argument("--test_data", type=str, default="../../data/math/sample/val.json", help="Path to the JSON file to be loaded")
     parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-3B-Instruct", help="Base model path or huggingface repo")
     parser.add_argument( "--adapter", type=str, required=True, help="Adapter model path")
     parser.add_argument( "--device", type=str, default="cuda:0", help="GPU")

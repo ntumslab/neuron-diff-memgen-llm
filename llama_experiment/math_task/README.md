@@ -34,7 +34,7 @@ python adder.py \
 # Train
 You can train the model using the provided training and validation data with:
 ```
-python train_lora.py \
+python train.py \
   --base_model meta-llama/Llama-3.2-3B-Instruct \
   --output_path model/default \
   --data_path ../../data/math/default \
@@ -49,7 +49,7 @@ python train_lora.py \
 
 When training is complete:
 * The LoRA adapter will be saved under the folder specified by `--output_path`.
-* The best model checkpoint will be located at:`{--output_path}/checkpoints/{checkpoint-***}`
+* The best model checkpoint will be located at: `{--output_path}/checkpoints/{checkpoint-***}`
 * Best model here refers to the one that achieves optimal mem/gen behavior during evaluation.
 
 # Compute Neuron Mean Differentiation (NMD)

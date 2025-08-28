@@ -34,22 +34,22 @@ python ciphertext.py \
 # Train
 You can train the model using the provided training and validation data with:
 ```
-python train_lora.py \
+python train.py \
   --base_model meta-llama/Llama-3.2-3B-Instruct \
   --output_path model/default \
-  --data_path ../../data/math/default \
+  --data_path ../../data/cipher/default \
   --img_path img/default.png \
-  --train_epoch 50
+  --train_epoch 30
 ```
 * --base_model : Base model path or Hugging Face repo (default: meta-llama/Llama-3.2-3B-Instruct)
 *	--output_path  : Path to save the LoRA adapter (default: model/default)
-* --data_path: Directory containing training and validation data (default: ../../data/math/default)
+* --data_path: Directory containing training and validation data (default: ../../data/cipher/default)
 * --img_path  : Path to save the training curve plot (default: img/default.png)
-* --train_epoch  : Number of training epochs (default: 50)
+* --train_epoch  : Number of training epochs (default: 30)
 
 When training is complete:
 * The LoRA adapter will be saved under the folder specified by `--output_path`.
-* The best model checkpoint will be located at:`{--output_path}/checkpoints/{checkpoint-***}`
+* The best model checkpoint will be located at: `{--output_path}/checkpoints/{checkpoint-***}`
 * Best model here refers to the one that achieves optimal mem/gen behavior during evaluation.
 
 # Compute Neuron Mean Differentiation (NMD)
