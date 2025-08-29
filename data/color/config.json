@@ -1,0 +1,111 @@
+{
+    "name_color_map": {
+        "Alice": [
+            "gray"
+        ],
+        "Bob": [
+            "white"
+        ],
+        "Charlie": [
+            "blue"
+        ],
+        "Diana": [
+            "green"
+        ],
+        "Eve": [
+            "yellow"
+        ],
+        "Frank": [
+            "black"
+        ],
+        "Grace": [
+            "red"
+        ],
+        "Henry": [
+            "pink"
+        ],
+        "Ivy": [
+            "orange"
+        ],
+        "Jack": [
+            "purple"
+        ],
+        "Kate": [
+            "brown"
+        ],
+        "Lily": [
+            "cyan"
+        ],
+        "Mike": [
+            "magenta"
+        ],
+        "Nancy": [
+            "lime"
+        ],
+        "Oscar": [
+            "olive"
+        ],
+        "Peter": [
+            "teal"
+        ]
+    },
+    "roles": [
+        "rhino",
+        "swan",
+        "penguin",
+        "panda",
+        "tiger",
+        "lion",
+        "elephant",
+        "giraffe",
+        "zebra",
+        "hippo",
+        "kangaroo",
+        "koala",
+        "monkey",
+        "squirrel",
+        "rabbit",
+        "fox",
+        "wolf",
+        "bear",
+        "deer",
+        "horse",
+        "zebra",
+        "donkey",
+        "cow",
+        "pig",
+        "sheep",
+        "goat",
+        "dog",
+        "cat",
+        "mouse",
+        "rabbit",
+        "parrot",
+        "eagle",
+        "gorilla",
+        "dragon",
+        "dolphin",
+        "whale",
+        "shark",
+        "octopus",
+        "squid"
+    ],
+    "all_colors": [
+        "gray",
+        "white",
+        "blue",
+        "green",
+        "yellow",
+        "black",
+        "red",
+        "pink",
+        "orange",
+        "purple",
+        "brown",
+        "cyan",
+        "magenta",
+        "lime",
+        "olive",
+        "teal"
+    ]
+}
