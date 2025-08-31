@@ -40,7 +40,7 @@ When the run completes, the NMD files will be saved under `../repr_analysis_snap
 * gen_repr_hid, gen_repr_qbase, gen_repr_qlora, gen_repr_vbase, gen_repr_vlora
 * mem_repr_hid, mem_repr_qbase, mem_repr_qlora, mem_repr_vbase, mem_repr_vlora
 
-If the number of NMD samples is insufficient (you’ll need ~5000 samples), adjust the `--nums_samples` for more pairwise samples.
+If the number of NMD samples is insufficient (you’ll need ~5000 samples), adjust the `--num_samples` for more pairwise samples.
 
 #  Inference-time Intervention (ITI)
 In this part, we will utilize NMD last step we obtain to steer the model behavior toward generalization or memorization.
