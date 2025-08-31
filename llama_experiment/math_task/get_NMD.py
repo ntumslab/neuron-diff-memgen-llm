@@ -276,7 +276,7 @@ def main():
             save_and_clear('mem_repr_vlora', mem_repr_vlora), save_and_clear('gen_repr_vlora', gen_repr_vlora)
 
         total = gen + mem + err
-        print(f"Gen: {gen / total}, Mem: {mem / total}, Diff: {diff / total}")
+        print(f"Gen: {gen / total}, Mem: {mem / total}, Diff: {diff / total / 2}")
 
     evaluate_pairwise(model, tokenizer, eval_1_dataset, eval_2_dataset, device, 8)
 

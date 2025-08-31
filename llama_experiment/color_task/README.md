@@ -26,21 +26,21 @@ When training is complete:
 After training the model, you can compute **Neuron Mean Differentiation (NMD)** by running inference on a pairwise dataset:
 ```
 python get_NMD.py \
-  --test_file ../../data/math/sample_pairwise/test_0.json
+  --num_samples 10000
   --base_model meta-llama/Llama-3.2-3B-Instruct
   --adapter_path {path/to/your_best_adapter}
   --device cuda:0
 ```
-* --test_file: Path to the pairwise data (default: ../../data/math/sample_pairwise/test_0.json)
+* --num_samples: Number of pairwise data for obtaining NMD (default: 10000)
 * --base_model: Base model path or Hugging Face repo (default: meta-llama/Llama-3.2-3B-Instruct)
 * --adapter_path: Path to your best adapter model **(required)**
 * --device: GPU device (default: cuda:0)
 
-When the run completes, the NMD files will be saved under `../repr_analysis_snapshots/math`, including:
+When the run completes, the NMD files will be saved under `../repr_analysis_snapshots/color`, including:
 * gen_repr_hid, gen_repr_qbase, gen_repr_qlora, gen_repr_vbase, gen_repr_vlora
 * mem_repr_hid, mem_repr_qbase, mem_repr_qlora, mem_repr_vbase, mem_repr_vlora
 
-If the number of NMD samples is insufficient (you’ll need ~5000 samples), rerun the same script with additional test files, e.g. test_1.json, test_2.json, … until you reach the required sample size.
+If the number of NMD samples is insufficient (you’ll need ~5000 samples), adjust the `--nums_samples` for more pairwise samples.
 
 #  Inference-time Intervention (ITI)
 In this part, we will utilize NMD last step we obtain to steer the model behavior toward generalization or memorization.
