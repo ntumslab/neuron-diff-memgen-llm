@@ -15,7 +15,6 @@ import torch, gc
 from transformers import LlamaForCausalLM, AutoTokenizer
 from transformers.models.llama.modeling_llama import LlamaDecoderLayer
 from peft import PeftModel
-from adder import Adder
 
 class CustomLlamaDecoderLayer(LlamaDecoderLayer):
     def __init__(self, config, indices_diff_dict={}, layer_idx=None, alpha=1, applied_layer_idx=tuple(range(26))):
@@ -53,7 +52,7 @@ class CustomLlamaDecoderLayer(LlamaDecoderLayer):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run ITI with LoRA adapter")
-    parser.add_argument("--test_data", type=str, default="../../data/math/sample/val.json", help="Path to the JSON file to be loaded")
+    parser.add_argument("--test_data", type=str, default="../../data/cipher/sample/val.json", help="Path to the JSON file to be loaded")
     parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-3B-Instruct", help="Base model path or huggingface repo")
     parser.add_argument( "--adapter_path", type=str, required=True, help="Adapter model path")
     parser.add_argument( "--results_path", type=str, default="results/", help="Result saved path")
@@ -62,11 +61,10 @@ if __name__ == "__main__":
     parser.add_argument("--topNs", type=float, nargs="+", default=[0.05, 0.1], help="List of topN fractions, e.g. --topNs 0.05 0.1")
     args = parser.parse_args()
 
-    adder = Adder()
     hyperparameter_combinations = list(itertools.product(args.topNs, args.alphas))
     hyperparam_results = {}
     test_rounds = 100
-    max_new_tokens = 300
+    max_new_tokens = 30
 
     with open(args.test_data, "r") as f:
         test_datas = json.load(f)
@@ -80,13 +78,33 @@ if __name__ == "__main__":
     tokenizer.pad_token = tokenizer.eos_token
     model.eval()
 
+    def verify_output_type(data, text):
+        text = text[len(data['input']):]
+        mem_pattern_hashed = data['mem_pattern_hashed']
+        if text.startswith(f'<{mem_pattern_hashed}>'):
+            return 'mem'
+        if text.startswith(data['output']):
+            return 'gen'
+        return 'unknown'
+
     print("Running original model inference...")
     ori_results = []
     for _ in tqdm(range(test_rounds)):
         data = test_datas[_]
-
-        question = data["input"]
-        input_ids = tokenizer.encode(question, return_tensors="pt").to(device)
+        system_msg = {
+                "role": "system",
+                "content": "You are a helpful assistant."
+            }
+        messages = [
+                        system_msg,
+                        {"role": "user", "content": data["input"]}
+                    ]
+        input_text = tokenizer.apply_chat_template(
+                        messages,
+                        tokenize=False,
+                        add_generation_prompt=True
+                    )
+        input_ids = tokenizer.encode(input_text, return_tensors="pt").to(device)
         attention_mask = torch.tensor([[1] * input_ids.shape[1]]).to(device)
 
         if args.device.startswith("cuda") and torch.cuda.is_available():
@@ -102,10 +120,17 @@ if __name__ == "__main__":
             eos_token_id=tokenizer.eos_token_id,
             pad_token_id=tokenizer.pad_token_id,
         )
-        output_text = tokenizer.decode(output[0], skip_special_tokens=True)
+        generated_texts = tokenizer.decode(output[0], skip_special_tokens=True)
+        input_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        output_texts = data['output']
 
-        mg_ori = adder.verify_output_type(data, output_text)
-        mg_ori = 1 if mg_ori == "mem" else 0 if mg_ori == "gen" else 2
+        data = {
+            'input': input_text,
+            'output': output_texts,
+            'mem_pattern_hashed': data['mem_pattern_hashed']
+        }
+        mg_ori = verify_output_type(data, generated_texts)
+        mg_ori = 1 if mg_ori == 'mem' else 0 if mg_ori == 'gen' else 2
         ori_results.append(mg_ori)
 
     mg_ori_counter = Counter()
@@ -129,8 +154,8 @@ if __name__ == "__main__":
 
         return corr_coefficients_2d
     
-    mem_repr_ln2 = np.load(f'../repr_analysis_snapshots/math/mem_repr_hid.npy')
-    gen_repr_ln2 = np.load(f'../repr_analysis_snapshots/math/gen_repr_hid.npy')
+    mem_repr_ln2 = np.load(f'../repr_analysis_snapshots/cipher/mem_repr_hid.npy')
+    gen_repr_ln2 = np.load(f'../repr_analysis_snapshots/cipher/gen_repr_hid.npy')
     print("NMD shape:", mem_repr_ln2.shape, gen_repr_ln2.shape)
     correlations_neuron_wise = calculate_correlation(np.vstack((mem_repr_ln2, gen_repr_ln2)), [1 for _ in range(len(mem_repr_ln2))] + [0 for _ in range(len(gen_repr_ln2))])
     print("Neuron-wise correlations completed!!")
@@ -151,7 +176,19 @@ if __name__ == "__main__":
         return output_text
 
     def process_data(data, ori_result, tokenizer, model_iti_gen, model_iti_mem, model_iti_random, max_new_tokens, device):
-        question = data['input']
+        system_msg = {
+                "role": "system",
+                "content": "You are a helpful assistant."
+            }
+        messages = [
+                        system_msg,
+                        {"role": "user", "content":  data['input']}
+                    ]
+        text = tokenizer.apply_chat_template(
+                        messages,
+                        tokenize=False,
+                        add_generation_prompt=True
+                    )
         input_ids = tokenizer.encode(question, return_tensors="pt").to(device)
         attention_mask = torch.tensor([[1] * input_ids.shape[1]]).to(device)
         
@@ -163,6 +200,15 @@ if __name__ == "__main__":
             output_text_iti_gen = future_gen.result()
             output_text_iti_mem = future_mem.result()
             output_text_iti_random = future_random.result()
+
+        input_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        output_texts = data['output']
+
+        data = {
+            'input': input_text,
+            'output': output_texts,
+            'mem_pattern_hashed': data['mem_pattern_hashed']
+        }
 
         mg_gen = adder.verify_output_type(data, output_text_iti_gen)
         mg_mem = adder.verify_output_type(data, output_text_iti_mem)
