@@ -1,0 +1,402 @@
+[
+  {
+    "input": "Lily is blue. Jack is whale. Lily is squid. Bob is whale. Nancy is whale. Jack is brown. what color is Bob?",
+    "output": "brown"
+  },
+  {
+    "input": "Mike is wolf. Alice is cyan. Bob is dog. Jack is horse. Ivy is dog. Jack is gray. Alice is dog. Mike is magenta. what color is Bob?",
+    "output": "cyan"
+  },
+  {
+    "input": "Nancy is pink. Peter is squirrel. Lily is elephant. Kate is olive. Bob is orange. Mike is elephant. Kate is cow. Nancy is elephant. Frank is magenta. Frank is squirrel. what color is Lily?",
+    "output": "pink"
+  },
+  {
+    "input": "Bob is lime. Lily is goat. Diana is pig. Alice is sheep. Alice is purple. Bob is octopus. Mike is gray. Lily is brown. Oscar is pig. Mike is pig. what color is Diana?",
+    "output": "gray"
+  },
+  {
+    "input": "Henry is cow. Nancy is monkey. Jack is goat. Peter is goat. Peter is pink. Henry is brown. Frank is goat. Nancy is teal. Diana is cow. Ivy is cow. what color is Diana?",
+    "output": "brown"
+  },
+  {
+    "input": "Ivy is eagle. Diana is white. Nancy is elephant. Eve is parrot. Oscar is red. Frank is zebra. Charlie is panda. Peter is zebra. Frank is yellow. Oscar is elephant. what color is Nancy?",
+    "output": "red"
+  },
+  {
+    "input": "Ivy is pink. Grace is dragon. Diana is shark. Eve is shark. Grace is teal. Ivy is shark. what color is Diana?",
+    "output": "pink"
+  },
+  {
+    "input": "Ivy is cyan. Jack is mouse. Lily is white. Mike is olive. Diana is black. Frank is black. Frank is giraffe. Mike is mouse. Ivy is swan. Lily is whale. what color is Jack?",
+    "output": "olive"
+  },
+  {
+    "input": "Eve is zebra. Frank is shark. Oscar is magenta. Frank is purple. Oscar is lion. Grace is gray. Grace is zebra. what color is Eve?",
+    "output": "gray"
+  },
+  {
+    "input": "Alice is panda. Eve is gorilla. Jack is olive. Mike is brown. Eve is brown. Jack is panda. Kate is pink. Nancy is panda. Mike is gorilla. Lily is brown. what color is Nancy?",
+    "output": "olive"
+  },
+  {
+    "input": "Bob is horse. Bob is gray. Diana is red. Oscar is horse. Peter is hippo. Peter is red. Diana is hippo. Lily is horse. what color is Oscar?",
+    "output": "gray"
+  },
+  {
+    "input": "Peter is purple. Kate is purple. Nancy is rhino. Eve is purple. Ivy is purple. Charlie is dragon. Mike is orange. Ivy is goat. Nancy is cyan. Mike is dragon. what color is Charlie?",
+    "output": "orange"
+  },
+  {
+    "input": "Ivy is blue. Jack is penguin. Mike is white. Peter is gorilla. Mike is monkey. Kate is monkey. Peter is black. Jack is gray. Ivy is dog. what color is Kate?",
+    "output": "white"
+  },
+  {
+    "input": "Kate is swan. Bob is kangaroo. Lily is kangaroo. Lily is red. Eve is bear. Diana is kangaroo. Kate is olive. Eve is blue. what color is Bob?",
+    "output": "red"
+  },
+  {
+    "input": "Ivy is hippo. Alice is squirrel. Alice is brown. Grace is hippo. Jack is hippo. Oscar is cyan. Jack is red. Mike is hippo. Diana is cyan. Eve is black. what color is Mike?",
+    "output": "red"
+  },
+  {
+    "input": "Eve is donkey. Mike is rabbit. Diana is donkey. Diana is lime. Henry is rabbit. Mike is yellow. Eve is lime. what color is Henry?",
+    "output": "yellow"
+  },
+  {
+    "input": "Oscar is purple. Henry is bear. Charlie is cat. Ivy is dragon. Eve is olive. Henry is pink. Ivy is white. Eve is cat. Charlie is olive. Frank is bear. what color is Frank?",
+    "output": "pink"
+  },
+  {
+    "input": "Eve is magenta. Charlie is eagle. Jack is zebra. Nancy is zebra. Jack is cyan. Nancy is cyan. Diana is eagle. Eve is eagle. what color is Diana?",
+    "output": "magenta"
+  },
+  {
+    "input": "Henry is yellow. Nancy is cyan. Henry is cat. Jack is white. Jack is wolf. Ivy is dolphin. Nancy is dolphin. Frank is sheep. Lily is brown. Lily is sheep. what color is Ivy?",
+    "output": "cyan"
+  },
+  {
+    "input": "Kate is orange. Ivy is bear. Ivy is yellow. Diana is cyan. Henry is white. Oscar is pig. Henry is pig. Diana is zebra. Kate is shark. what color is Oscar?",
+    "output": "white"
+  },
+  {
+    "input": "Kate is cat. Alice is koala. Peter is white. Charlie is lion. Ivy is magenta. Bob is brown. Peter is lion. Eve is white. Oscar is blue. Oscar is koala. what color is Alice?",
+    "output": "blue"
+  },
+  {
+    "input": "Kate is deer. Nancy is deer. Kate is olive. Charlie is deer. Jack is deer. what color is Nancy?",
+    "output": "olive"
+  },
+  {
+    "input": "Charlie is dragon. Nancy is pink. Jack is dragon. Diana is dragon. Lily is olive. Mike is dragon. Diana is red. Nancy is kangaroo. Lily is rhino. Grace is dragon. what color is Charlie?",
+    "output": "red"
+  },
+  {
+    "input": "Henry is lion. Ivy is olive. Peter is lion. Ivy is hippo. Bob is cyan. Peter is white. Nancy is olive. Nancy is hippo. Bob is elephant. what color is Henry?",
+    "output": "white"
+  },
+  {
+    "input": "Jack is koala. Alice is olive. Ivy is cyan. Ivy is rhino. Eve is yellow. Alice is gorilla. Eve is koala. what color is Jack?",
+    "output": "yellow"
+  },
+  {
+    "input": "Diana is squirrel. Bob is teal. Alice is cow. Bob is kangaroo. Alice is pink. Diana is olive. Ivy is squirrel. what color is Ivy?",
+    "output": "olive"
+  },
+  {
+    "input": "Eve is purple. Henry is goat. Grace is swan. Kate is swan. Frank is goat. Frank is green. Kate is magenta. Eve is pig. Bob is swan. Henry is green. what color is Bob?",
+    "output": "magenta"
+  },
+  {
+    "input": "Grace is blue. Nancy is fox. Grace is cat. Frank is dog. Eve is dog. Jack is dog. Nancy is pink. Frank is yellow. Kate is swan. Bob is dog. what color is Bob?",
+    "output": "yellow"
+  },
+  {
+    "input": "Ivy is olive. Eve is yellow. Diana is black. Kate is swan. Ivy is swan. Eve is squirrel. Frank is blue. Henry is squirrel. Kate is olive. Frank is rhino. what color is Henry?",
+    "output": "yellow"
+  },
+  {
+    "input": "Lily is teal. Henry is parrot. Frank is cow. Ivy is magenta. Eve is teal. Henry is red. Ivy is cow. Mike is parrot. Charlie is pink. Charlie is gorilla. what color is Frank?",
+    "output": "magenta"
+  },
+  {
+    "input": "Kate is white. Kate is dolphin. Lily is lime. Lily is giraffe. Ivy is teal. Ivy is whale. Jack is whale. what color is Jack?",
+    "output": "teal"
+  },
+  {
+    "input": "Alice is monkey. Nancy is goat. Lily is green. Nancy is lime. Jack is dog. Alice is cyan. Lily is dog. what color is Jack?",
+    "output": "green"
+  },
+  {
+    "input": "Lily is squid. Diana is squirrel. Lily is orange. Mike is squirrel. Oscar is pink. Oscar is cat. Mike is purple. what color is Diana?",
+    "output": "purple"
+  },
+  {
+    "input": "Henry is teal. Oscar is penguin. Jack is lion. Eve is yellow. Jack is yellow. Kate is cow. Oscar is black. Henry is cow. Eve is lion. Grace is cow. what color is Grace?",
+    "output": "teal"
+  },
+  {
+    "input": "Mike is rhino. Bob is squid. Ivy is whale. Eve is whale. Grace is teal. Mike is cyan. Grace is lion. Ivy is purple. Lily is olive. Nancy is cyan. what color is Eve?",
+    "output": "purple"
+  },
+  {
+    "input": "Oscar is olive. Mike is teal. Peter is olive. Kate is red. Alice is giraffe. Kate is giraffe. Oscar is cat. Peter is cat. Nancy is giraffe. Mike is lion. what color is Nancy?",
+    "output": "red"
+  },
+  {
+    "input": "Bob is pig. Grace is green. Peter is rabbit. Oscar is white. Grace is pig. Nancy is pig. Mike is white. Charlie is pig. Oscar is eagle. Alice is zebra. what color is Nancy?",
+    "output": "green"
+  },
+  {
+    "input": "Ivy is cat. Jack is dragon. Lily is lime. Eve is purple. Lily is dolphin. Frank is dragon. Henry is dragon. Charlie is blue. Frank is white. Eve is cat. what color is Henry?",
+    "output": "white"
+  },
+  {
+    "input": "Charlie is penguin. Alice is squid. Mike is squid. Mike is black. Ivy is penguin. Nancy is penguin. Eve is rabbit. Alice is black. Eve is teal. Nancy is blue. what color is Ivy?",
+    "output": "blue"
+  },
+  {
+    "input": "Ivy is red. Diana is gray. Ivy is penguin. Charlie is penguin. Alice is koala. Diana is giraffe. Alice is magenta. Peter is penguin. what color is Charlie?",
+    "output": "red"
+  },
+  {
+    "input": "Henry is squid. Peter is giraffe. Eve is swan. Mike is swan. Eve is olive. Bob is giraffe. Lily is olive. Henry is white. Lily is swan. Bob is red. what color is Peter?",
+    "output": "red"
+  },
+  {
+    "input": "Diana is deer. Charlie is deer. Oscar is blue. Alice is pink. Alice is deer. Lily is white. Lily is squid. Oscar is tiger. what color is Diana?",
+    "output": "pink"
+  },
+  {
+    "input": "Lily is mouse. Mike is green. Alice is red. Ivy is black. Kate is wolf. Alice is cat. Mike is mouse. Ivy is lion. Kate is gray. what color is Lily?",
+    "output": "green"
+  },
+  {
+    "input": "Kate is parrot. Grace is dolphin. Grace is orange. Henry is parrot. Nancy is parrot. Kate is purple. what color is Nancy?",
+    "output": "purple"
+  },
+  {
+    "input": "Bob is white. Frank is zebra. Alice is cyan. Mike is teal. Mike is shark. Nancy is lion. Henry is teal. Grace is teal. Frank is purple. Bob is lion. what color is Nancy?",
+    "output": "white"
+  },
+  {
+    "input": "Eve is dragon. Grace is bear. Charlie is orange. Mike is dolphin. Eve is purple. Charlie is bear. Oscar is brown. Oscar is fox. Ivy is dolphin. Mike is yellow. what color is Grace?",
+    "output": "orange"
+  },
+  {
+    "input": "Frank is monkey. Henry is penguin. Eve is white. Lily is olive. Henry is orange. Bob is orange. Bob is penguin. Eve is monkey. Ivy is penguin. Jack is cow. what color is Frank?",
+    "output": "white"
+  },
+  {
+    "input": "Peter is squirrel. Bob is white. Grace is tiger. Frank is tiger. Eve is lime. Peter is gray. Jack is white. Diana is gray. Grace is orange. Eve is dog. what color is Frank?",
+    "output": "orange"
+  },
+  {
+    "input": "Bob is goat. Grace is hippo. Bob is lime. Nancy is green. Kate is eagle. Grace is green. Nancy is hippo. Peter is yellow. Peter is eagle. what color is Kate?",
+    "output": "yellow"
+  },
+  {
+    "input": "Jack is bear. Jack is olive. Mike is giraffe. Peter is bear. Frank is monkey. Mike is magenta. Frank is purple. what color is Peter?",
+    "output": "olive"
+  },
+  {
+    "input": "Diana is pig. Henry is cyan. Jack is white. Peter is pig. Frank is pig. Henry is zebra. Frank is brown. Jack is swan. what color is Diana?",
+    "output": "brown"
+  },
+  {
+    "input": "Diana is kangaroo. Oscar is deer. Frank is deer. Nancy is deer. Charlie is gray. Diana is orange. Jack is deer. Frank is white. Charlie is gorilla. what color is Nancy?",
+    "output": "white"
+  },
+  {
+    "input": "Grace is olive. Oscar is teal. Henry is parrot. Frank is parrot. Oscar is goat. Charlie is green. Nancy is parrot. Henry is pink. Charlie is koala. Grace is deer. what color is Nancy?",
+    "output": "pink"
+  },
+  {
+    "input": "Grace is red. Charlie is lime. Charlie is rhino. Ivy is lion. Jack is lion. Alice is bear. Ivy is pink. Diana is lion. Alice is teal. Grace is pig. what color is Diana?",
+    "output": "pink"
+  },
+  {
+    "input": "Mike is white. Kate is white. Charlie is swan. Kate is koala. Diana is swan. Mike is koala. Charlie is black. what color is Diana?",
+    "output": "black"
+  },
+  {
+    "input": "Nancy is eagle. Frank is kangaroo. Grace is black. Frank is orange. Alice is penguin. Grace is lion. Oscar is lion. Henry is kangaroo. Oscar is black. Nancy is white. what color is Henry?",
+    "output": "orange"
+  },
+  {
+    "input": "Henry is teal. Frank is purple. Charlie is horse. Diana is horse. Frank is horse. Henry is elephant. what color is Charlie?",
+    "output": "purple"
+  },
+  {
+    "input": "Nancy is swan. Grace is squirrel. Nancy is red. Lily is squid. Bob is red. Frank is squid. Frank is magenta. Kate is gray. Diana is pink. Kate is squirrel. what color is Lily?",
+    "output": "magenta"
+  },
+  {
+    "input": "Nancy is goat. Mike is purple. Alice is monkey. Diana is goat. Nancy is magenta. Frank is shark. Mike is shark. Frank is purple. Grace is purple. Bob is goat. what color is Diana?",
+    "output": "magenta"
+  },
+  {
+    "input": "Nancy is gorilla. Henry is red. Charlie is zebra. Charlie is pink. Henry is gorilla. Bob is zebra. Nancy is red. Frank is mouse. Frank is purple. what color is Bob?",
+    "output": "pink"
+  },
+  {
+    "input": "Lily is yellow. Charlie is octopus. Kate is squid. Charlie is black. Frank is olive. Lily is eagle. Peter is squid. Frank is dolphin. Kate is purple. what color is Peter?",
+    "output": "purple"
+  },
+  {
+    "input": "Jack is mouse. Frank is parrot. Charlie is hippo. Mike is elephant. Frank is brown. Peter is purple. Jack is orange. Peter is bear. Charlie is pink. Alice is parrot. what color is Alice?",
+    "output": "brown"
+  },
+  {
+    "input": "Oscar is rhino. Eve is teal. Diana is rhino. Eve is eagle. Frank is brown. Frank is rhino. what color is Oscar?",
+    "output": "brown"
+  },
+  {
+    "input": "Frank is zebra. Alice is blue. Nancy is blue. Diana is zebra. Diana is yellow. Nancy is rabbit. Alice is rabbit. what color is Frank?",
+    "output": "yellow"
+  },
+  {
+    "input": "Henry is shark. Charlie is deer. Alice is deer. Henry is black. Jack is shark. Nancy is green. Nancy is wolf. Jack is black. Alice is lime. what color is Charlie?",
+    "output": "lime"
+  },
+  {
+    "input": "Frank is dolphin. Eve is orange. Mike is magenta. Mike is dog. Eve is dolphin. Frank is orange. Henry is dog. what color is Henry?",
+    "output": "magenta"
+  },
+  {
+    "input": "Oscar is magenta. Bob is orange. Kate is octopus. Oscar is dragon. Eve is octopus. Grace is octopus. Eve is olive. Peter is rabbit. Mike is magenta. Henry is octopus. what color is Grace?",
+    "output": "olive"
+  },
+  {
+    "input": "Nancy is black. Mike is cow. Nancy is horse. Henry is cow. Lily is horse. Peter is horse. Jack is blue. Ivy is horse. Jack is cat. Mike is red. what color is Peter?",
+    "output": "black"
+  },
+  {
+    "input": "Lily is deer. Peter is cow. Alice is pink. Peter is gray. Lily is teal. Alice is giraffe. Grace is giraffe. what color is Grace?",
+    "output": "pink"
+  },
+  {
+    "input": "Lily is octopus. Nancy is gray. Diana is magenta. Frank is octopus. Nancy is monkey. Diana is octopus. what color is Lily?",
+    "output": "magenta"
+  },
+  {
+    "input": "Charlie is red. Grace is penguin. Charlie is squirrel. Jack is magenta. Bob is red. Mike is penguin. Mike is teal. Ivy is penguin. Jack is zebra. Kate is red. what color is Ivy?",
+    "output": "teal"
+  },
+  {
+    "input": "Ivy is giraffe. Lily is rhino. Charlie is squid. Ivy is pink. Eve is fox. Lily is lime. Eve is black. Kate is yellow. Kate is squid. Nancy is pink. what color is Charlie?",
+    "output": "yellow"
+  },
+  {
+    "input": "Charlie is deer. Oscar is olive. Charlie is orange. Bob is dragon. Oscar is dragon. Henry is dragon. what color is Bob?",
+    "output": "olive"
+  },
+  {
+    "input": "Alice is tiger. Bob is lime. Jack is pig. Eve is cow. Eve is black. Bob is tiger. Jack is teal. what color is Alice?",
+    "output": "lime"
+  },
+  {
+    "input": "Diana is gray. Diana is squirrel. Peter is gray. Ivy is gorilla. Ivy is blue. Oscar is gorilla. Jack is gorilla. Peter is squirrel. what color is Jack?",
+    "output": "blue"
+  },
+  {
+    "input": "Eve is squid. Charlie is olive. Eve is red. Alice is gorilla. Frank is gorilla. Peter is octopus. Peter is blue. Henry is panda. Charlie is tiger. Frank is teal. what color is Alice?",
+    "output": "teal"
+  },
+  {
+    "input": "Mike is gorilla. Kate is gorilla. Lily is elephant. Diana is lime. Diana is wolf. Kate is pink. Oscar is white. Lily is white. Grace is gorilla. Peter is cyan. what color is Mike?",
+    "output": "pink"
+  },
+  {
+    "input": "Kate is white. Lily is wolf. Diana is wolf. Henry is bear. Kate is wolf. Henry is black. Nancy is magenta. Grace is black. Grace is bear. Nancy is elephant. what color is Lily?",
+    "output": "white"
+  },
+  {
+    "input": "Peter is teal. Henry is koala. Mike is orange. Mike is swan. Oscar is mouse. Peter is koala. Eve is brown. Kate is blue. Kate is horse. Eve is mouse. what color is Henry?",
+    "output": "teal"
+  },
+  {
+    "input": "Nancy is dolphin. Oscar is white. Jack is eagle. Grace is pink. Alice is giraffe. Nancy is gray. Oscar is bear. Eve is dolphin. Bob is pink. Bob is eagle. what color is Eve?",
+    "output": "gray"
+  },
+  {
+    "input": "Mike is lime. Frank is bear. Mike is panda. Charlie is bear. Alice is cyan. Nancy is giraffe. Alice is donkey. Lily is pink. Lily is bear. Nancy is olive. what color is Frank?",
+    "output": "pink"
+  },
+  {
+    "input": "Alice is orange. Diana is purple. Eve is hippo. Alice is hippo. Diana is rhino. Eve is orange. Henry is rhino. what color is Henry?",
+    "output": "purple"
+  },
+  {
+    "input": "Diana is horse. Nancy is sheep. Nancy is pink. Henry is horse. Diana is cyan. Eve is horse. what color is Eve?",
+    "output": "cyan"
+  },
+  {
+    "input": "Oscar is olive. Oscar is goat. Charlie is red. Charlie is hippo. Kate is goat. Diana is goat. what color is Diana?",
+    "output": "olive"
+  },
+  {
+    "input": "Diana is swan. Grace is teal. Charlie is donkey. Peter is rhino. Ivy is swan. Alice is lime. Lily is olive. Charlie is lime. Lily is swan. Alice is donkey. what color is Ivy?",
+    "output": "olive"
+  },
+  {
+    "input": "Oscar is fox. Eve is green. Mike is white. Eve is penguin. Ivy is octopus. Mike is dolphin. Bob is magenta. Ivy is orange. Bob is fox. what color is Oscar?",
+    "output": "magenta"
+  },
+  {
+    "input": "Oscar is zebra. Frank is monkey. Charlie is zebra. Kate is pink. Peter is green. Oscar is magenta. Peter is monkey. Kate is penguin. Henry is red. Henry is swan. what color is Charlie?",
+    "output": "magenta"
+  },
+  {
+    "input": "Bob is rhino. Charlie is wolf. Oscar is wolf. Jack is wolf. Bob is gray. Charlie is blue. what color is Jack?",
+    "output": "blue"
+  },
+  {
+    "input": "Alice is zebra. Mike is dog. Oscar is zebra. Eve is yellow. Henry is zebra. Grace is zebra. Jack is zebra. Peter is zebra. Eve is zebra. Mike is white. what color is Oscar?",
+    "output": "purple"
+  },
+  {
+    "input": "Peter is gorilla. Peter is pink. Alice is bear. Oscar is cyan. Diana is giraffe. Alice is teal. Lily is giraffe. Nancy is gorilla. Jack is red. Jack is giraffe. what color is Diana?",
+    "output": "red"
+  },
+  {
+    "input": "Grace is lime. Bob is gray. Ivy is cat. Peter is swan. Kate is cat. Peter is orange. Bob is cat. Grace is dolphin. Mike is teal. Mike is goat. what color is Kate?",
+    "output": "gray"
+  },
+  {
+    "input": "Bob is elephant. Oscar is blue. Lily is bear. Bob is green. Diana is gray. Oscar is bear. Eve is elephant. Diana is wolf. Eve is green. what color is Lily?",
+    "output": "blue"
+  },
+  {
+    "input": "Grace is giraffe. Lily is giraffe. Jack is octopus. Eve is lime. Jack is brown. Eve is monkey. Lily is red. Peter is squirrel. Bob is giraffe. Peter is pink. what color is Bob?",
+    "output": "red"
+  },
+  {
+    "input": "Alice is cat. Alice is gray. Lily is teal. Mike is lime. Bob is green. Grace is deer. Ivy is gray. Ivy is cat. Bob is bear. Lily is deer. what color is Grace?",
+    "output": "teal"
+  },
+  {
+    "input": "Ivy is bear. Kate is donkey. Mike is zebra. Diana is olive. Charlie is zebra. Diana is zebra. Kate is lime. Ivy is pink. what color is Charlie?",
+    "output": "olive"
+  },
+  {
+    "input": "Kate is tiger. Lily is lime. Diana is tiger. Peter is tiger. Bob is octopus. Henry is penguin. Charlie is penguin. Diana is yellow. Lily is penguin. Nancy is cyan. what color is Kate?",
+    "output": "yellow"
+  },
+  {
+    "input": "Charlie is donkey. Eve is lion. Eve is red. Peter is tiger. Jack is tiger. Kate is tiger. Alice is lion. Henry is gorilla. Henry is cyan. Kate is olive. what color is Peter?",
+    "output": "olive"
+  },
+  {
+    "input": "Ivy is olive. Nancy is brown. Bob is dog. Jack is purple. Nancy is cat. Diana is purple. Mike is olive. Peter is olive. Peter is zebra. Henry is cat. what color is Henry?",
+    "output": "brown"
+  },
+  {
+    "input": "Alice is magenta. Eve is blue. Grace is gorilla. Alice is bear. Grace is yellow. Eve is sheep. Nancy is lion. Frank is gorilla. Ivy is sheep. Nancy is green. what color is Frank?",
+    "output": "yellow"
+  },
+  {
+    "input": "Henry is pig. Eve is purple. Frank is blue. Diana is purple. Frank is sheep. Bob is sheep. Henry is brown. Kate is horse. Oscar is rhino. Mike is sheep. what color is Bob?",
+    "output": "blue"
+  }
+]

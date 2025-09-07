@@ -16,6 +16,15 @@ from transformers import LlamaForCausalLM, AutoTokenizer
 from transformers.models.llama.modeling_llama import LlamaDecoderLayer
 from peft import PeftModel
 
+global config_file
+global names
+global roles
+with open('../../data/color/config.json', "r") as f:
+    config_file = json.load(f)
+names = list(config_file["name_color_map"].keys())
+roles = config_file["roles"]  
+train_name_colors = config_file['name_color_map']
+
 class CustomLlamaDecoderLayer(LlamaDecoderLayer):
     def __init__(self, config, indices_diff_dict={}, layer_idx=None, alpha=1, applied_layer_idx=tuple(range(26))):
         super().__init__(config)
@@ -50,9 +59,10 @@ class CustomLlamaDecoderLayer(LlamaDecoderLayer):
         self.alpha = alpha
         self.applied_layer_idx = applied_layer_idx
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run ITI with LoRA adapter")
-    parser.add_argument("--test_data", type=str, default="../../data/cipher/sample/val.json", help="Path to the JSON file to be loaded")
+    parser.add_argument("--test_data", type=str, default="../../data/color/ITI_data.json", help="Path to the JSON file to be loaded")
     parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-3B-Instruct", help="Base model path or huggingface repo")
     parser.add_argument( "--adapter_path", type=str, required=True, help="Adapter model path")
     parser.add_argument( "--results_path", type=str, default="results/", help="Result saved path")
@@ -64,7 +74,7 @@ if __name__ == "__main__":
     hyperparameter_combinations = list(itertools.product(args.topNs, args.alphas))
     hyperparam_results = {}
     test_rounds = 100
-    max_new_tokens = 30
+    max_new_tokens = 2
 
     with open(args.test_data, "r") as f:
         test_datas = json.load(f)
@@ -78,33 +88,31 @@ if __name__ == "__main__":
     tokenizer.pad_token = tokenizer.eos_token
     model.eval()
 
-    def verify_output_type(data, text):
-        text = text[len(data['input']):]
-        mem_pattern_hashed = data['mem_pattern_hashed']
-        if text.startswith(f'<{mem_pattern_hashed}>'):
-            return 'mem'
-        if text.startswith(data['output']):
-            return 'gen'
-        return 'unknown'
+    def verify_output_type(output, question, answer, train_name_colors):
+        question_mark_index = output.find("?")
+        substring = output[question_mark_index+1:]
+        if len(substring.split()) == 0 or len(substring.split()[0].split('.')) == 0:
+            return 2, ""
+
+        color = substring.split()[0].split('.')[0].strip(string.punctuation)
+        # Labels == 0 -> gen, labels == 1 -> mem
+        if color == answer:
+            label = 0  # generalization
+        elif color in train_name_colors[question]:
+            label = 1  # memorization
+        else:
+            label = 2 # error
+        return label, color
 
     print("Running original model inference...")
     ori_results = []
     for _ in tqdm(range(test_rounds)):
         data = test_datas[_]
-        system_msg = {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            }
-        messages = [
-                        system_msg,
-                        {"role": "user", "content": data["input"]}
-                    ]
-        input_text = tokenizer.apply_chat_template(
-                        messages,
-                        tokenize=False,
-                        add_generation_prompt=True
-                    )
-        input_ids = tokenizer.encode(input_text, return_tensors="pt").to(device)
+        question = data["input"]
+        answer = data["output"]
+        name = data["input"].split()[-1][:-1]
+
+        input_ids = tokenizer.encode(question, return_tensors="pt").to(device)
         attention_mask = torch.tensor([[1] * input_ids.shape[1]]).to(device)
 
         if args.device.startswith("cuda") and torch.cuda.is_available():
@@ -120,18 +128,9 @@ if __name__ == "__main__":
             eos_token_id=tokenizer.eos_token_id,
             pad_token_id=tokenizer.pad_token_id,
         )
-        generated_texts = tokenizer.decode(output[0], skip_special_tokens=True)
-        input_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
-        output_texts = data['output']
-
-        data = {
-            'input': input_text,
-            'output': output_texts,
-            'mem_pattern_hashed': data['mem_pattern_hashed']
-        }
-        mg_ori = verify_output_type(data, generated_texts)
-        mg_ori = 1 if mg_ori == 'mem' else 0 if mg_ori == 'gen' else 2
-        ori_results.append(mg_ori)
+        output_text = tokenizer.decode(output[0], skip_special_tokens=True)
+        label, color = verify_output_type(output_text, name, answer, train_name_colors)
+        ori_results.append(label)
 
     mg_ori_counter = Counter()
     mg_ori_counter.update(ori_results)
@@ -154,8 +153,8 @@ if __name__ == "__main__":
 
         return corr_coefficients_2d
     
-    mem_repr_ln2 = np.load(f'../repr_analysis_snapshots/cipher/mem_repr_hid.npy')
-    gen_repr_ln2 = np.load(f'../repr_analysis_snapshots/cipher/gen_repr_hid.npy')
+    mem_repr_ln2 = np.load(f'../repr_analysis_snapshots/color/mem_repr_hid.npy')
+    gen_repr_ln2 = np.load(f'../repr_analysis_snapshots/color/gen_repr_hid.npy')
     print("NMD shape:", mem_repr_ln2.shape, gen_repr_ln2.shape)
     correlations_neuron_wise = calculate_correlation(np.vstack((mem_repr_ln2, gen_repr_ln2)), [1 for _ in range(len(mem_repr_ln2))] + [0 for _ in range(len(gen_repr_ln2))])
     print("Neuron-wise correlations completed!!")
@@ -176,19 +175,10 @@ if __name__ == "__main__":
         return output_text
 
     def process_data(data, ori_result, tokenizer, model_iti_gen, model_iti_mem, model_iti_random, max_new_tokens, device):
-        system_msg = {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            }
-        messages = [
-                        system_msg,
-                        {"role": "user", "content":  data['input']}
-                    ]
-        text = tokenizer.apply_chat_template(
-                        messages,
-                        tokenize=False,
-                        add_generation_prompt=True
-                    )
+        question = data['input']
+        answer = data["output"]
+        name = data["input"].split()[-1][:-1]
+
         input_ids = tokenizer.encode(question, return_tensors="pt").to(device)
         attention_mask = torch.tensor([[1] * input_ids.shape[1]]).to(device)
         
@@ -201,22 +191,9 @@ if __name__ == "__main__":
             output_text_iti_mem = future_mem.result()
             output_text_iti_random = future_random.result()
 
-        input_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
-        output_texts = data['output']
-
-        data = {
-            'input': input_text,
-            'output': output_texts,
-            'mem_pattern_hashed': data['mem_pattern_hashed']
-        }
-
-        mg_gen = verify_output_type(data, output_text_iti_gen)
-        mg_mem = verify_output_type(data, output_text_iti_mem)
-        mg_random = verify_output_type(data, output_text_iti_random)
-        
-        mg_gen = 1 if mg_gen == 'mem' else 0 if mg_gen == 'gen' else 2
-        mg_mem = 1 if mg_mem == 'mem' else 0 if mg_mem == 'gen' else 2
-        mg_random = 1 if mg_random == 'mem' else 0 if mg_random == 'gen' else 2
+        mg_gen, _ = verify_output_type(output_text_iti_gen, name, answer, train_name_colors)
+        mg_mem, _ = verify_output_type(output_text_iti_mem, name, answer, train_name_colors)
+        mg_random, _ = verify_output_type(output_text_iti_random, name, answer, train_name_colors)
         
         return ori_result, mg_gen, mg_mem, mg_random
 
