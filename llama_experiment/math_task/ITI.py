@@ -4,13 +4,14 @@ import random
 import itertools
 import copy
 import numpy as np
+import pandas as pd
 from scipy.stats import pearsonr
 from collections import Counter
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 
-import torch
+import torch, gc
 from transformers import LlamaForCausalLM, AutoTokenizer
 from transformers.models.llama.modeling_llama import LlamaDecoderLayer
 from peft import PeftModel
@@ -54,15 +55,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run ITI with LoRA adapter")
     parser.add_argument("--test_data", type=str, default="../../data/math/sample/val.json", help="Path to the JSON file to be loaded")
     parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-3B-Instruct", help="Base model path or huggingface repo")
-    parser.add_argument( "--adapter", type=str, required=True, help="Adapter model path")
+    parser.add_argument( "--adapter_path", type=str, required=True, help="Adapter model path")
+    parser.add_argument( "--results_path", type=str, default="results/", help="Result saved path")
     parser.add_argument( "--device", type=str, default="cuda:0", help="GPU")
-
     parser.add_argument("--alphas", type=int, nargs="+", default=[1, 3, 5], help="List of alpha values, e.g. --alphas 1 3 5")
     parser.add_argument("--topNs", type=float, nargs="+", default=[0.05, 0.1], help="List of topN fractions, e.g. --topNs 0.05 0.1")
-
     args = parser.parse_args()
-    adder = Adder()
 
+    adder = Adder()
     hyperparameter_combinations = list(itertools.product(args.topNs, args.alphas))
     hyperparam_results = {}
     test_rounds = 1
@@ -71,12 +71,9 @@ if __name__ == "__main__":
     with open(args.test_data, "r") as f:
         test_datas = json.load(f)
 
-    ori_results = []
-
     tokenizer = AutoTokenizer.from_pretrained(args.base_model)
     model = LlamaForCausalLM.from_pretrained(args.base_model)
-    model = PeftModel.from_pretrained(model, args.adapter)
-
+    model = PeftModel.from_pretrained(model, args.adapter_path)
     device = torch.device(args.device)
     model.to(device)
     tokenizer.padding_side = "left"
@@ -84,6 +81,7 @@ if __name__ == "__main__":
     model.eval()
 
     print("Running original model inference...")
+    ori_results = []
     for _ in tqdm(range(test_rounds)):
         data = test_datas[_]
 
@@ -114,6 +112,9 @@ if __name__ == "__main__":
     mg_ori_counter.update(ori_results)
     print("Original result: ", mg_ori_counter)
     print("Original model inference completed!!")
+    del model
+    gc.collect()
+    torch.cuda.empty_cache()
 
     print("Computing correlations...")
     def calculate_correlation(arrays, labels):
@@ -135,6 +136,12 @@ if __name__ == "__main__":
     print("Neuron-wise correlations completed!!")
 
     print("Running ITI...")
+    # '''TEST'''
+    # mem_repr_ln2 = np.load(f'../repr_analysis_snapshots/math/mem_repr_hid.npy')
+    # gen_repr_ln2 = np.load(f'../repr_analysis_snapshots/math/gen_repr_hid.npy')
+    # correlations_neuron_wise = np.load(f'/data2/enginekevin/mgllm/workspace/math/correlations_neuron_wise_hid.npy')
+    # ori_results = np.load('/data2/enginekevin/mgllm/workspace/math/ori_results.npy')
+    # '''TEST'''
     def generate_output(model, input_ids, attention_mask, max_new_tokens, tokenizer):
         torch.cuda.manual_seed_all(42)
         output = model.generate(input_ids, max_new_tokens=max_new_tokens, do_sample=False, num_beams=5, early_stopping=True,
@@ -178,7 +185,31 @@ if __name__ == "__main__":
         
         return results
 
-    result_rows = []
+    def summarize_results(fake_results):
+        mapping = {0: "Gen", 1: "Mem", 2: "Other"}
+        rows = []
+
+        # Mem → Gen
+        mem_cases = [mg_gen for ori, mg_gen, _, _ in fake_results if ori == 1]
+        cnt = Counter(mem_cases)
+        total = sum(cnt.values())
+        row = {"Direction": "Mem → Gen"}
+        for k, v in mapping.items():
+            row[f"% {v}"] = 100 * cnt.get(k, 0) / total if total else 0
+        rows.append(row)
+
+        # Gen → Mem
+        gen_cases = [mg_mem for ori, _, mg_mem, _ in fake_results if ori == 0]
+        cnt = Counter(gen_cases)
+        total = sum(cnt.values())
+        row = {"Direction": "Gen → Mem"}
+        for k, v in mapping.items():
+            row[f"% {v}"] = 100 * cnt.get(k, 0) / total if total else 0
+        rows.append(row)
+
+        df = pd.DataFrame(rows)
+        return df
+    
     for enu, combination in enumerate(hyperparameter_combinations):
         topN, alpha = combination
         topN = int(topN * gen_repr_ln2.shape[1] * gen_repr_ln2.shape[2])
@@ -222,11 +253,11 @@ if __name__ == "__main__":
         tokenizer.padding_side = 'left'
         tokenizer.pad_token = tokenizer.eos_token
         model_iti_gen = LlamaForCausalLM.from_pretrained(args.base_model)
-        model_iti_gen = PeftModel.from_pretrained(model_iti_gen, args.adapter)
+        model_iti_gen = PeftModel.from_pretrained(model_iti_gen, args.adapter_path)
         model_iti_mem = LlamaForCausalLM.from_pretrained(args.base_model)
-        model_iti_mem = PeftModel.from_pretrained(model_iti_mem, args.adapter)
+        model_iti_mem = PeftModel.from_pretrained(model_iti_mem, args.adapter_path)
         model_iti_random = LlamaForCausalLM.from_pretrained(args.base_model)
-        model_iti_random = PeftModel.from_pretrained(model_iti_random, args.adapter)
+        model_iti_random = PeftModel.from_pretrained(model_iti_random, args.adapter_path)
             
         for i in range(len(model_iti_gen.model.model.layers)):
             custom_block = copy.deepcopy(model_iti_gen.model.model.layers[i])
@@ -249,60 +280,12 @@ if __name__ == "__main__":
         model_iti_random = model_iti_random.to(device)
 
         results = run_parallel(test_datas, ori_results, tokenizer, model_iti_gen, model_iti_mem, model_iti_random, max_new_tokens, device, test_rounds)
-        c = Counter()
-        c.update(results)
+        df = summarize_transitions(results)
+        os.makedirs(args.results_path, exist_ok=True)
+        safe_name = str(combination).replace(" ", "_").replace("(", "").replace(")", "").replace(",", "-")
+        df.to_csv(
+            os.path.join(args.results_path, f"result_{safe_name}.csv"),
+            index=False,
+            encoding="utf-8-sig"
+        )
         
-        hyperparam_results[combination] = c
-        result_row = [combination, 
-            sum([c[k] for k in c if k[0] == 0 and k[1] == 0])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[3] == 0])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 1 and k[2] == 1])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[3] == 1])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[1] == 0])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[1] == 1])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[1] == 2])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[3] == 0])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[3] == 1])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 1 and k[3] == 2])/ sum([c[k] for k in c if k[0] == 1]),
-            sum([c[k] for k in c if k[0] == 0 and k[2] == 0])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[2] == 1])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[2] == 2])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[3] == 0])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[3] == 1])/ sum([c[k] for k in c if k[0] == 0]),
-            sum([c[k] for k in c if k[0] == 0 and k[3] == 2])/ sum([c[k] for k in c if k[0] == 0]),
-            ]
-        result_rows.append(result_row)
-        print(combination)
-        
-        print(f"original: gen: {sum([c[k] for k in c if k[0] == 0]) / test_rounds:.4f}, mem: {sum([c[k] for k in c if k[0] == 1]) / test_rounds:.4f}, other: {sum([c[k] for k in c if k[0] == 2]) / test_rounds:.4f}")
-        print(f"gen: gen: {sum([c[k] for k in c if k[1] == 0]) / test_rounds:.4f}, mem: {sum([c[k] for k in c if k[1] == 1]) / test_rounds:.4f}, other: {sum([c[k] for k in c if k[1] == 2]) / test_rounds:.4f}")
-        print(f"mem: gen: {sum([c[k] for k in c if k[2] == 0]) / test_rounds:.4f}, mem: {sum([c[k] for k in c if k[2] == 1]) / test_rounds:.4f}, other: {sum([c[k] for k in c if k[2] == 2]) / test_rounds:.4f}")
-        print(f"random: gen: {sum([c[k] for k in c if k[3] == 0]) / test_rounds:.4f}, mem: {sum([c[k] for k in c if k[3] == 1]) / test_rounds:.4f}, other: {sum([c[k] for k in c if k[3] == 2]) / test_rounds:.4f}")
-        
-        print(f'gen model:')
-        print(f'  original gen:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 0 and k[1] == 0])} ({sum([c[k] for k in c if k[0] == 0 and k[1] == 0])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 0 and k[1] == 1])} ({sum([c[k] for k in c if k[0] == 0 and k[1] == 1])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 0 and k[1] == 2])} ({sum([c[k] for k in c if k[0] == 0 and k[1] == 2])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'  original mem:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 1 and k[1] == 0])} ({sum([c[k] for k in c if k[0] == 1 and k[1] == 0])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 1 and k[1] == 1])} ({sum([c[k] for k in c if k[0] == 1 and k[1] == 1])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 1 and k[1] == 2])} ({sum([c[k] for k in c if k[0] == 1 and k[1] == 2])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'mem model:')
-        print(f'  original gen:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 0 and k[2] == 0])} ({sum([c[k] for k in c if k[0] == 0 and k[2] == 0])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 0 and k[2] == 1])} ({sum([c[k] for k in c if k[0] == 0 and k[2] == 1])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 0 and k[2] == 2])} ({sum([c[k] for k in c if k[0] == 0 and k[2] == 2])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'  original mem:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 1 and k[2] == 0])} ({sum([c[k] for k in c if k[0] == 1 and k[2] == 0])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 1 and k[2] == 1])} ({sum([c[k] for k in c if k[0] == 1 and k[2] == 1])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 1 and k[2] == 2])} ({sum([c[k] for k in c if k[0] == 1 and k[2] == 2])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'random model:')
-        print(f'  original gen:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 0 and k[3] == 0])} ({sum([c[k] for k in c if k[0] == 0 and k[3] == 0])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 0 and k[3] == 1])} ({sum([c[k] for k in c if k[0] == 0 and k[3] == 1])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 0 and k[3] == 2])} ({sum([c[k] for k in c if k[0] == 0 and k[3] == 2])/ sum([c[k] for k in c if k[0] == 0]):.4f}%)')
-        print(f'  original mem:')
-        print(f'    gen  : {sum([c[k] for k in c if k[0] == 1 and k[3] == 0])} ({sum([c[k] for k in c if k[0] == 1 and k[3] == 0])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    mem  : {sum([c[k] for k in c if k[0] == 1 and k[3] == 1])} ({sum([c[k] for k in c if k[0] == 1 and k[3] == 1])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')
-        print(f'    other: {sum([c[k] for k in c if k[0] == 1 and k[3] == 2])} ({sum([c[k] for k in c if k[0] == 1 and k[3] == 2])/ sum([c[k] for k in c if k[0] == 1]):.4f}%)')

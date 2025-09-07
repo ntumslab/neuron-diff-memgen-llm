@@ -3,3 +3,5 @@ model/**
 
 img/**
 !img/sample.png
+
+results/
